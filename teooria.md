@@ -32,12 +32,19 @@ or
 int x;
 x = 10;
 
+## typecasting
+int x = 0;
+float y = (float)(x);
+
 
 
 # Print statement (System.out.println)
 Supports only one variable, can be given multiple by adding them together as one:
+
 System.out.println();   // prints as a separate row
 System.out.print();     // prints in-line
+System.out.printf();    // formatted output
+
 
 System.out.println(arg1 + arg2);
 System.out.println("str" + arg + " " + arg2);
@@ -75,3 +82,69 @@ new Scanner - create a new scanner from class Scanner
 Scanner scanner = new Scanner(scanner_type);
 .. insert scanner methods ..
 scanner.close();    // close scanner
+
+
+
+# If-else statements
+
+if(condition){
+    ...
+}
+else if(condition){
+    ...
+}
+else{
+    ...
+}
+
+# operators
+!x          not
+a && b      and
+a || b      or
+
+a / b       division, type a > type a
+a % b       remainder
+
+
+
+# Math class
+Math.PI
+Math.E
+
+Math.pow(int: x, int: y);       # x^y
+Math.log10(a)                   # log base 10 of (a: double) 
+Math.random();                  # returns double from [0, 1)
+
+Math.round(double: x);          # returns int
+Math.ceil(double: x);           # rounds up > int
+Math.floor(double: x);          # rounds down > int
+
+Math.max(double: x, double: y);             
+Math.min(double: x, double: y);
+
+
+
+# Printf
+System.out.printf(str);
+
+str format:
+%[flags][width][.precision][specifier-character]
+
+
+
+# For/while loops
+
+for(start; condition; end;){
+    ...
+}
+
+// example: start at i=7 with autodecrement while x == true
+// i++ autoincrement, i-- autodecrement
+
+for(i = 17; x && true; i--) i = 17{
+    ...
+}
+
+
+
+

@@ -14,13 +14,33 @@
 					"label": ""
 				},
 				{
-					"line": 36,
+					"line": 40,
 					"column": 29,
 					"label": ""
 				},
 				{
-					"line": 48,
+					"line": 55,
 					"column": 12,
+					"label": ""
+				},
+				{
+					"line": 87,
+					"column": 22,
+					"label": ""
+				},
+				{
+					"line": 99,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 109,
+					"column": 12,
+					"label": ""
+				},
+				{
+					"line": 126,
+					"column": 1,
 					"label": ""
 				}
 			]
