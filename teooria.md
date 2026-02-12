@@ -309,18 +309,164 @@ else{
 
 
 # For/while loops
+break, continue work as in python
 
+
+## for loop
+// i++ autoincrement, i-- autodecrement
+
+// start, condition, end can be left out,
 for(start; condition; end;){
     ...
 }
 
-// example: start at i=7 with autodecrement while x == true
-// i++ autoincrement, i-- autodecrement
-
-for(i = 17; x && true; i--) i = 17{
+// infinite loop 
+for(;;){
     ...
 }
 
 
+// for x in range(10)
+for(int i = 0; i<10; i++){
+    ...
+}
 
+// iterate over elements
+int[] nums = {1, 2, 3, 4}
+for (int n : nums) {
+    ...
+}
+
+// multi-variable for-loop
+for(int i = 0, int j = 10; i < j; i++, j--) {
+    ...
+}
+
+
+## while loop
+while(condition){
+    ...
+}
+
+
+## do-while loop. runs at least once.
+do{
+    ...
+}while(condition);
+
+
+
+# Ternary if-else
+(condition) ? (if-true) : (else);
+!! has to return a value, doesnt work with void !!
+
+example:
+int x = condition ? 1 : 2;
+
+
+
+
+
+# Enchanced switches
+
+String day = "Saturday";
+boolean weekday;
+
+switch(day) {
+    case "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" -> weekday = true;
+    case "Saturday", "Sunday" -> weekday = false;
+    default -> weekday = false;
+}
+if (weekday) {
+    System.out.println("It's a weekday");
+}
+else{
+    System.out.println("It's weekend");
+}
+
+
+
+
+
+# methods
+
+[access modifier] [static/instance] [return type] [method name](params) {
+    ...
+    return value;
+}
+
+## overloaded methods
+methods that share the same name, but different parameters
+signature = name + parameters
+
+## access modifiers
+
+modifier        seen by:
+private         same class
+protected       same class and -package
+public          same class and -package, subclass
+(**empty)       same class and -package, subclass and -package
+                "empty" is called package private
+
+## static/instance
+static                  belongs to the class, shared between all objects
+instance/non-static     belongs to an object, all get their separate values
+
+
+
+
+
+# variable scope
+
+## local/parameter variables
+Local variables are set inside functions, loops or blocks. They exist only inside said structures
+
+void f1(int y) {
+    int x = 5;             ## local variable
+    system.out.println(y); ## parameter variable
+    System.out.println(x);
+}
+x = 5   // error, because it's not defined
+
+## instance variables
+Instance variables are defined inside classes. Every instance of an object has a different set of the same instance variables.
+Created outside methods, non-static
+
+class Person {
+    String name; // instance variable
+}
+Person p1 = new Person();
+Person p2 = new Person();
+p1.name = "Alice";
+p2.name = "Bob";
+
+## class (static) variables
+defined inside classes by using "static"
+shared between all objects, access through class.
+
+class Counter {
+    static int total = 0;
+}
+Counter.total = 5;
+
+## block scope
+all items defined inside a block can't be seen outside the block.
+To bypass this, create variables before starting a block
+
+if (true) {
+    int x = 10; // block scope
+}
+x = 11 // error, because x doesnt exist
+
+
+
+
+
+# collections (list, array, set, ...)
+
+## list - ordered, non-unique
+list<type> name = new ArrayList<>();
+list.add(x);
+
+## set - non-ordered, unique
 

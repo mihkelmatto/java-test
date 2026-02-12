@@ -25,10 +25,7 @@ public class Kohv {
 
 /*
 
-private     seen by: same class
-protected   seen by: same class and -packet
-public      seen by: same class and -packet, subclass
-(**empty)   seen by: same class and -packet, subclass and -packet
+
 
 
 overdefining
