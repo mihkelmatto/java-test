@@ -1,9 +1,18 @@
-# Java in-line comment
+# IDE, Java tips
+
+## Java in-line comment
 // one line comment
 /* multiple line comment */
 /** javadoc multiple line comment */
 
+## IDEA tricks
+- psvm + [tab]                  generate public static void main
+- sout + [tab]                  generate system.out.println();
+- [alt] + [insert]              generate getters, setters
+- [ctrl] + [space]              open suggestion menu
 
+- reformat code                 can be used to horizontally refit code
+- refactor-rename               can be used to mass rename/replace through the entire project
 
 
 
@@ -137,11 +146,54 @@ String methods are used to manipulate strings
 String text = "abc"
 all methods will have a prefix of "text."
 
-length()    > int           length of the string 
-isEmpty     > boolean       returns true if length(str) = 0
-isBlank()   > boolean       returns true if string is empty or consists of spaces
+## boolean values
+length()    > int               length of the string 
+isEmpty     > boolean           returns true if length(str) = 0
+isBlank()   > boolean           returns true if string is empty or consists of spaces
 
-equals(x)   > boolean       returns true if text is identical to x
+## comparison
+equals(x)   > boolean           returns true if text is identical to x
+equalsIgnoreCase(x) > boolean   equals, but ignores uppercase
+compareto(x) > int              unicode dec value (str1 - str2)
+compareToIgnoreCase(x) > int    compareTo, but ignores uppercase
+
+## indexing
+charAt(index) > char            returns the char from specified index
+indexOf(str) > int              returns the index of substring's first occurrence
+lastIndexOf(str) > int          returns the index of substring's last occurrence
+contains(str) > bool            true if the string contains arg substring
+startsWith(str) > bool          true if the string contains arg prefix
+endsWith(str) > bool            true if the string contains arg suffix 
+
+## substrings and replacements
+substring(x, y) > string        returns the substring from indeces [x, y)
+replace(old, new)               replace all instances of a character or a substring
+replaceAll(r1, r2) > string     regex based replace
+replaceFirst(r1, r2) > string   regex based replacefirst
+
+## trim, spaces
+trim() > String                 removes spaces from prefix-suffix
+strip() > String                removes unicode-spaces (more accurate than trim)
+stripLeading() > String         strip prefix-only
+stripTrailing() > String        strip suffix-only
+
+## upper-lowercase
+both support Locale as args
+
+toUpperCase() > String          change all chars to uppercase
+toLowerCase() > String          change all chars to lowercase
+
+# split-concat
+split(str regex, int limit) > String[]      split. Limit (list length) is optional
+concat(str) > str                           concatenate, adding arg to end
+String.join("spr", x1, x2) > String         join multiple strings, using the provided separator
+
+# other
+repeat(int count) > string      repeat the string x times
+
+codePointAt(int index) > int            returns unicode dec at index
+codePointBefore(int index) > int        returns unicode before index
+codePoints() > IntStream                returns a stream of unicode
 
 
 

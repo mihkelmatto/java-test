@@ -1,11 +1,8 @@
 public class Main {
     public static void main(String[] args) {
-        String name = "Tim";
-        char firstletter = name.charAt(0);
-        int age = 20;
-        double height = 20.3;
-
-        System.out.printf("Hello, %s.\nYour name starts with a %c.\n", name, firstletter);
-        System.out.printf("You are %d years old and about %.0f meters tall", age, height);
+        String x1 = "123";
+        String x2 = "456";
+        x1 = String.join(",", x1, x2);
+        System.out.println(x1.codePointAt(2));
     }
 }
