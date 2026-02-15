@@ -1,21 +1,21 @@
 
-import javax.sound.sampled.SourceDataLine;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String day = "Saturday";
-        boolean weekday;
-
-        switch(day) {
-            case "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" -> weekday = true;
-            case "Saturday", "Sunday" -> weekday = false;
-            default -> weekday = false;
+        Scanner input = new Scanner;
+        double var1;
+        operator String;
+        double var2;
+        
+        while true {
+            System.out.println("Enter a number: ");
+            try {
+                double var1 = input.next
+            } catch (Exception e) {
+            }
         }
-        if (weekday) {
-            System.out.println("It's a weekday");
-        }
-        else{
-            System.out.println("It's weekend");
-        }
+        input.close();
     }
 }

@@ -65,17 +65,32 @@
 				},
 				{
 					"line": 369,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 378,
 					"column": 20,
 					"label": ""
 				},
 				{
-					"line": 390,
+					"line": 399,
 					"column": 9,
 					"label": ""
 				},
 				{
-					"line": 418,
+					"line": 427,
 					"column": 16,
+					"label": ""
+				},
+				{
+					"line": 473,
+					"column": 8,
+					"label": ""
+				},
+				{
+					"line": 528,
+					"column": 0,
 					"label": ""
 				}
 			]

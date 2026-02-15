@@ -367,6 +367,15 @@ int x = condition ? 1 : 2;
 
 
 
+# try-catch block
+try{
+    ...
+} catch (exceptionType - optional) {
+    ...
+} finally-optional {
+    ...
+}
+
 # Enchanced switches
 
 String day = "Saturday";
@@ -465,8 +474,88 @@ x = 11 // error, because x doesnt exist
 # collections (list, array, set, ...)
 
 ## list - ordered, non-unique
-list<type> name = new ArrayList<>();
-list.add(x);
+types of lists:
+- ArrayList         dynamic, indexing, random add/remove
+- LinkedList        doubly linked list, indexing, random add/remove
+- Vector            synchronized ArrayList
 
-## set - non-ordered, unique
+Main methods:
+add(), get(), set(), remove(),
+size(), contains(), indexOf(), sort(), forEach()
+
+## set - might be ordered, unique
+- HashSet           unordered, fast lookup
+- LinkesHashSet     preserves insertion order
+- TreeSet           sorted elements
+
+Main methods: add(), remove(), contains(), size(), iterator(), clear()
+
+## Queue / Deque - FIFO or LIFO
+- LinkesList        queue and deque
+- PriorityQueue     priority queue
+- ArrayDeque        double-ended queue. fast.
+
+Main methods: add(), offer(), poll(), peek(), remove(), addFirst(), addLast()
+
+## Map - dictionaries, key-value pairs
+Does not extend collection, but is part of the framework.
+
+- HashMap           fast lookup, unordered
+- LinkedHashMap     preserves insertion order
+- TreeMap           sorted by keys
+
+Main methods:
+put(), get(), remove()
+containsKey(), containsValue()
+keySet(), values(), entrySet()
+
+## Collection hierarchy
+
+Collection Framework
+│
+├─ Collection (interface)
+│   ├─ List        → ArrayList, LinkedList, Vector
+│   └─ Set         → HashSet, LinkedHashSet, TreeSet
+│   └─ Queue / Deque → LinkedList, PriorityQueue, ArrayDeque
+│
+└─ Map (interface, not a Collection)
+    ├─ HashMap
+    ├─ LinkedHashMap
+    └─ TreeMap
+
+
+
+
+# arrays
+
+
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        // creating an array
+        String[] fruits = {"apple", "orange", "banana"};
+        System.out.println(fruits[0]);
+
+        int numfruits = fruits.length;
+        System.out.println(numfruits);
+
+        // for i in len(fruits)
+        for(int i = 0; i<fruits.length; i++) {
+            System.out.println(fruits[i]);
+        }
+        // sort in natural (type a) order
+        Arrays.sort(fruits);
+
+        // fill (replace) all elements with the arg
+        Arrays.fill(fruits, "pineapple");
+
+        // enhanced for loop (for x in fruit)
+        for(String fruit : fruits){
+            System.out.println(fruit);
+        }
+
+
+    }
+}
 
