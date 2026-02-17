@@ -1,15 +1,14 @@
-
-import java.util.Arrays;
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        int päev = 2;
-        int i = 0;
-        for(; i < 5; i++);{
-            System.out.println(1);
-            System.out.println(i);
+        int sum = add(1, 2, 3, 4, 5);
+        System.out.println(sum);
+
+    }
+    static int add(int... numbers) {
+        int sum = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            sum += numbers[i];
         }
-        System.out.println(i);
+        return sum;
     }
 }

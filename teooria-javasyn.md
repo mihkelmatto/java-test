@@ -535,7 +535,7 @@ Collection Framework
 
 
 
-# arrays
+# arrays, 2D-arrays
 import java.util.Arrays;
 
 
@@ -578,4 +578,29 @@ for(int i = 0; i < numbers.length; i++) {
 }
 if(!isFound){
     System.out.println("item not found");
+}
+
+## 2D-arrays
+String[] fruits = {"apple", "orange"};
+String[] vegetables = {"potato", "onion"};
+
+String[][] groceries = {fruits, vegetables, {"butter", "pork"}};
+
+String potato = groceries[1][0];    // indekseerimine
+
+
+
+
+# Varargs - allow a method to accept a varying num of arguments
+// java will pack the arguments into an array (ellipsis)
+
+// only 1 vararg per method, it has to be the last argument'
+// for multiple varargs, use arrays as args instead
+
+static int add(int... numbers) {
+    int sum = 0;
+    for (int i = 0; i < numbers.length; i++) {
+        sum += numbers[i];
+    }
+    return sum;
 }

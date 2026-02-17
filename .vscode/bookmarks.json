@@ -1,7 +1,7 @@
 {
 	"files": [
 		{
-			"path": "teooria.md",
+			"path": "teooria-javasyn.md",
 			"bookmarks": [
 				{
 					"line": 0,
@@ -91,6 +91,26 @@
 				{
 					"line": 537,
 					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 593,
+					"column": 9,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "teooria-javaoop.md",
+			"bookmarks": [
+				{
+					"line": 0,
+					"column": 12,
+					"label": ""
+				},
+				{
+					"line": 23,
+					"column": 16,
 					"label": ""
 				}
 			]
