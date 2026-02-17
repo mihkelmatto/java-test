@@ -4,18 +4,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner input = new Scanner;
-        double var1;
-        operator String;
-        double var2;
-        
-        while true {
-            System.out.println("Enter a number: ");
-            try {
-                double var1 = input.next
-            } catch (Exception e) {
-            }
+        int päev = 2;
+        int i = 0;
+        for(; i < 5; i++);{
+            System.out.println(1);
+            System.out.println(i);
         }
-        input.close();
+        System.out.println(i);
     }
 }

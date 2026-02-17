@@ -27,13 +27,16 @@ Reference - memory address (stack) that points to the value (heap)
 - string, array, object
 
 
+// primitive data types
 int x = 10;     
 double x = 10.0;
 char x = '!'
 boolean x = true
 
+// reference data types
 String x = "abcde"
-
+Array
+Object
 
 ## steps to creating a variable
 1. declaration
@@ -276,6 +279,9 @@ System.out.print("Enter input: ");
 String input = scanner.nextLine();
 System.out.println("Your input: " + input);
 
+- other
+scanner.nextLine();             // clears the contents of a scanner
+
 ## creating a new scanner
 /*
 Scanner - class name
@@ -421,6 +427,9 @@ public          same class and -package, subclass
 static                  belongs to the class, shared between all objects
 instance/non-static     belongs to an object, all get their separate values
 
+## method signature
+format: methodname(type, type)
+
 
 
 
@@ -475,7 +484,7 @@ x = 11 // error, because x doesnt exist
 
 ## list - ordered, non-unique
 types of lists:
-- ArrayList         dynamic, indexing, random add/remove
+- ArrayList         dynamic, indexing, random add/remove, fixed length after creation
 - LinkedList        doubly linked list, indexing, random add/remove
 - Vector            synchronized ArrayList
 
@@ -527,35 +536,46 @@ Collection Framework
 
 
 # arrays
-
-
 import java.util.Arrays;
 
-public class Main {
-    public static void main(String[] args) {
-        // creating an array
-        String[] fruits = {"apple", "orange", "banana"};
-        System.out.println(fruits[0]);
 
-        int numfruits = fruits.length;
-        System.out.println(numfruits);
+## creating an array
+// arrays will be at fixed length after creation
+String[] fruits = {"apple", "orange", "banana"};    // fixed length of 3
+String[] foods = new String[3];                     // create an empty array of len(3)
 
-        // for i in len(fruits)
-        for(int i = 0; i<fruits.length; i++) {
-            System.out.println(fruits[i]);
-        }
-        // sort in natural (type a) order
-        Arrays.sort(fruits);
+## array methods
+int numfruits = fruits.length;      // get the length of an array
+Arrays.sort(fruits);                // sort in natural order (depending on type)
+Arrays.fill(fruits, "pineapple");   // fill (replace) all elements with the arg
 
-        // fill (replace) all elements with the arg
-        Arrays.fill(fruits, "pineapple");
+System.out.println(fruits[0]);      // indexing 
+fruits[0] = "apple"                 // set a value to an index
 
-        // enhanced for loop (for x in fruit)
-        for(String fruit : fruits){
-            System.out.println(fruit);
-        }
-
-
-    }
+## looping through an array
+// for i in len(fruits)
+for(int i = 0; i < fruits.length; i++) {
+    System.out.println(fruits[i]);
 }
 
+// enhanced for loop (for x in fruit)
+for(String fruit : fruits){
+    System.out.println(fruit);
+}
+
+## searching an array
+int[] numbers = {1, 3, 6, 2, 5, 7};
+int target = 2;
+boolean isfound = false;
+
+for(int i = 0; i < numbers.length; i++) {
+    if(target == numbers[i]){
+        System.out.println("item found at index: " + i);
+        // for strings, you need to use equals method
+        isfound = true;
+        break;
+    }
+}
+if(!isFound){
+    System.out.println("item not found");
+}
