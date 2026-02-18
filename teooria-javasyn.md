@@ -58,7 +58,7 @@ float y = (float)(x);
 # arithmetic, logic, unary operators
 
 ## arithmetic operators
-When operationg on different types, java will typecast everything to highest type.
+When operating on different types, java will typecast everything to highest type.
 order: byte → short → int → long → float → double
 
 operations          + - * / %
@@ -167,6 +167,12 @@ lastIndexOf(str) > int          returns the index of substring's last occurrence
 contains(str) > bool            true if the string contains arg substring
 startsWith(str) > bool          true if the string contains arg prefix
 endsWith(str) > bool            true if the string contains arg suffix 
+
+## typecasting
+Integer.ParseInt()              int > string
+Type.ParseType()                use any type here to cast Type x > String
+
+
 
 ## substrings and replacements
 substring(x, y) > string        returns the substring from indeces [x, y)
@@ -581,12 +587,19 @@ if(!isFound){
 }
 
 ## 2D-arrays
+// creating an array
 String[] fruits = {"apple", "orange"};
 String[] vegetables = {"potato", "onion"};
-
 String[][] groceries = {fruits, vegetables, {"butter", "pork"}};
 
-String potato = groceries[1][0];    // indekseerimine
+// creating an empty array
+boolean[][] booleans = new boolean[2][3];
+
+// indexing
+String potato = groceries[1][0];
+boolean[2] = new boolean[]{true, false, true};
+
+
 
 
 

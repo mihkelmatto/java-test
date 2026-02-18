@@ -1,3 +1,4 @@
+package OOP;
 public class Kohv {
   private String kohvisort;
   private double hind;
