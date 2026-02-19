@@ -603,6 +603,31 @@ boolean[2] = new boolean[]{true, false, true};
 
 
 
+# ArrayLists
+
+## creating Arraylists
+import java.util.ArrayList;
+
+ArrayList<Type> list = new ArrayList<>(); // replace Type with a value
+
+
+## methods
+- all methods have a prefix of "listname."
+
+add(item)               append to a list
+add(i, item)            add to an index
+set(i, item)            replace a value on an index
+get(i)                  get a value from an index
+remove(i)               remove from an index
+remove(item)            remove the first corresponding value
+
+size() > int            get the length of a list
+isEmpty() > bool        check if the list is empty
+contains(item) > bool   check if the list contains an item
+clear()                 remove all elements from a list
+
+
+
 
 # Varargs - allow a method to accept a varying num of arguments
 // java will pack the arguments into an array (ellipsis)
