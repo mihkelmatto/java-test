@@ -16,36 +16,52 @@
  !! max nr of prime sets > primesets[x]
 */
 import java.util.ArrayList;
+import java.util.Collections;
 
-public  class Main{
+public  class Kodu1a{
     public static void main(String[] args) {
-        int input = 1000;
+        int input = 1000000;
+        algarvuRingid5Suurimat(input);
+    }
+    static void algarvuRingid5Suurimat(int n){
+        ArrayList<Integer> primesets = getprimesets(n);
+        Collections.sort(primesets, Collections.reverseOrder());
+        // primesets.subList(5, primesets.size()).clear();
+        System.out.printf("Antud lähtekoht: %d\n", n);
+        for(int i=0; i<5; i++){
+            System.out.println(primesets.get(i));
+        }
+        System.out.printf("Väiksemaid erinevaid algarvuringe: %d\n", algarvuRingideArv(n) - 5);
+    }
+
+    static int algarvuRingideArv(int n){
+        ArrayList<Integer> primesets = getprimesets(n);
+        int arv = primesets.size();
+        return arv;
+    }
+
+    static ArrayList<Integer> getprimesets(int n){
         ArrayList<Integer> primesets = new ArrayList<>();
 
         // generate prime sets
-        int[] testset;
-        for(int i = input; i>9; i--){
+        if(n%2 ==0) n-= 1; // paaris > paaritu
+        for(int i = n; i>9; i-=2){
             if(numval(i)){
-                testset = rotation(i);
+                int[] testset = rotation(i);
                 int max = 0;
                 for(int j = 0; j < testset.length; j++){
                     if(testset[j] > max) max=testset[j];
+                }
+                if(max <= n && !primesets.contains(max) && get_isprime(testset)) primesets.add(max);
             }
-            if(max <= input && !primesets.contains(max) && get_isprime(testset)) primesets.add(max);
-            }
-            
         }
-        primesets.subList(5, primesets.size()).clear();
-        System.out.println(primesets);
+        return primesets;
     }
 
     static boolean numval(int num){
         String numstr = String.valueOf(num);
-        for(int i = 0; i < numstr.length(); i++){
-            if(numstr.matches(".*[024568].*")){
-                return false;
-            }
-        }
+        if(num % 3 == 0) return false;
+        if(numstr.matches(".*[024568].*")) return false;
         return true;
     }
 
@@ -64,11 +80,7 @@ public  class Main{
     static boolean get_isprime(int[] set) {
         for(int i = 0; i<set.length; i++){
             int num = set[i];
-            
-            if(num==1) return false;
-            if(num==2) return true;
-            if(num % 2 == 0 || num <= 0) return false;
-
+            // ei kontrolli num==1, num==2, num%2 ja num<=0, sest see on mujal kontrollitud
             int limit = (int)(Math.sqrt(num));
             for(int j = 3; j <= limit; j+=2){
                 if(num % j == 0){
