@@ -19,36 +19,34 @@ import java.util.ArrayList;
 
 public  class Main{
     public static void main(String[] args) {
-        int num = 106;
-        int maxnum = get_maxnum(num);
+        int input = 1000;
         ArrayList<Integer> primesets = new ArrayList<>();
 
         // generate prime sets
         int[] testset;
-        int testmax;
-        for(int i = maxnum; i>9; i--){
-            testmax = get_maxnum(i);
-            if(testmax <= num){
+        for(int i = input; i>9; i--){
+            if(numval(i)){
                 testset = rotation(i);
-                if(get_isprime(testset)) primesets.add(testset[0]); // 0 as max index?
+                int max = 0;
+                for(int j = 0; j < testset.length; j++){
+                    if(testset[j] > max) max=testset[j];
             }
+            if(max <= input && !primesets.contains(max) && get_isprime(testset)) primesets.add(max);
+            }
+            
         }
-        // print
-        // sort: duplicates, rotated versions
+        primesets.subList(5, primesets.size()).clear();
         System.out.println(primesets);
     }
-    static int get_maxnum(int num){
+
+    static boolean numval(int num){
         String numstr = String.valueOf(num);
-        int maxdigit = 0;
-        int maxindex = 0;
-            for(int i = 0; i < numstr.length(); i++){
-                int digit = Character.getNumericValue(numstr.charAt(i));
-                if(digit>maxdigit){
-                    maxdigit = digit;
-                    maxindex = i;
-                } 
+        for(int i = 0; i < numstr.length(); i++){
+            if(numstr.matches(".*[024568].*")){
+                return false;
             }
-    return Integer.parseInt(numstr.substring(maxindex, numstr.length()) + numstr.substring(0, maxindex));
+        }
+        return true;
     }
 
 
@@ -78,25 +76,6 @@ public  class Main{
                 }
             }
         }
-
-
-        
         return true;
-
     }
 }
-
-
-
-/* 
-    static String get_maxdigit(String numstr){
-        int maxdigit = 0;
-        for(int i = 0; i < numstr.length(); i++){
-            int digit = Character.getNumericValue(numstr.charAt(i));
-            if(digit>maxdigit){
-                maxdigit = digit;
-            } 
-        }
-        return String.valueOf(maxdigit);
-    }
-*/
