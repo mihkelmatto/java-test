@@ -28,7 +28,7 @@ public  class Kodu1a{
         Collections.sort(primesets, Collections.reverseOrder());
         // primesets.subList(5, primesets.size()).clear();
         System.out.printf("Antud lähtekoht: %d\n", n);
-        for(int i=0; i<5; i++){
+        for(int i=0; i < Math.min(5, primesets.size()); i++){
             System.out.println(primesets.get(i));
         }
         System.out.printf("Väiksemaid erinevaid algarvuringe: %d\n", algarvuRingideArv(n) - 5);
