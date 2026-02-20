@@ -55,7 +55,7 @@ public class Kodu1a {
 
             // rotatsioonide testimine kuni üks arv ei sobi (validnum) või jõuab lõpuni
             for(int j = 0; j<numlen; j++){ // kas intervall on õige? #########
-                if(testnum <= num && numval(testnum) &&isprime(testnum)){
+                if(testnum <= num && numval(testnum) && isprime(testnum)){
                     if(testnum > maxitem) maxitem = testnum;
                     testnum = rotate(testnum, numlen); // roteerib 1x liiga palju
                 }
@@ -85,9 +85,10 @@ public class Kodu1a {
         return newstart + newend;
     }
 
-    static boolean isprime(int num){ // input > 9, is an odd number -- ei pruugi olla
+    static boolean isprime(int num){ // sisend on alati paaritu arv
         int limit = (int)(Math.sqrt(num));
-        for(int i=2; i<=limit; i++){
+        if(num == 1) return false;
+        for(int i=3; i<=limit; i+=2){
             if(num % i == 0) return false;
         }
         return true;
