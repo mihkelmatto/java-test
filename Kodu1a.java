@@ -7,22 +7,24 @@
 // sisaldab arve 0, 2, 4, 5, 6, 8
 // kontrollid sisendit ennast, kui ta algab suurima numbriga
 /*
- 1. get max nr
- 2. generate sets
- 3. check prime for each item in set
- 4. get max of each set, sorted
- 5. output top 5 of max sorted
-
- !! max nr of prime sets > primesets[x]
+ 1. sisend paaris > paaritu
+ 2. iga paaritu arvu ja rotatsioonide kontroll: test <= n, isprime, vastasel juhul katkestab ja võtab järgmise paaritu arvu
+ 3. kui algarvuringi max ei ole veel primesets listis, siis lisab sinna
 */
+
 import java.util.ArrayList;
 import java.util.Collections;
 
-public  class Kodu1a{
+public class Kodu1a {
     public static void main(String[] args) {
-        int input = 1000000;
-        algarvuRingid5Suurimat(input);
+        long startTime = System.nanoTime();
+        algarvuRingid5Suurimat(1000000);
+        algarvuRingideArv(1000000);
+        long endTime = System.nanoTime();    // lõpp
+        long duration = (endTime - startTime) / 1000; // kestus nanosekundites
+        System.out.println(duration);
     }
+
     static void algarvuRingid5Suurimat(int n){
         ArrayList<Integer> primesets = getprimesets(n);
         Collections.sort(primesets, Collections.reverseOrder());
@@ -40,20 +42,29 @@ public  class Kodu1a{
         return arv;
     }
 
-    static ArrayList<Integer> getprimesets(int n){
+    static ArrayList<Integer> getprimesets(int num){
         ArrayList<Integer> primesets = new ArrayList<>();
 
-        // generate prime sets
-        if(n%2 ==0) n-= 1; // paaris > paaritu
-        for(int i = n; i>9; i-=2){
-            if(numval(i)){
-                int[] testset = rotation(i);
-                int max = 0;
-                for(int j = 0; j < testset.length; j++){
-                    if(testset[j] > max) max=testset[j];
+        // proovib kõiki paarituid arve vahemikus [10, num] ja salvestab maksimaalsed väärtused primesets listi
+        if(num % 2 == 0) num-= 1; // paaris > paaritu
+        for(int i = num; i > 9; i -= 2){
+            int testnum = i;                                // kirjutan üle rotatsioonide ajal, i puhul vist teeks katki
+            int numlen = (int)(Math.log10(testnum)) + 1;    // arg for rotate()
+            int maxitem = 0;
+            boolean validnum = true; // isprime() && i<=num
+
+            // rotatsioonide testimine kuni üks arv ei sobi (validnum) või jõuab lõpuni
+            for(int j = 0; j<numlen; j++){ // kas intervall on õige? #########
+                if(testnum <= num && numval(testnum) &&isprime(testnum)){
+                    if(testnum > maxitem) maxitem = testnum;
+                    testnum = rotate(testnum, numlen); // roteerib 1x liiga palju
                 }
-                if(max <= n && !primesets.contains(max) && get_isprime(testset)) primesets.add(max);
+                else{
+                    validnum = false;
+                    break;
+                }
             }
+            if(validnum && !primesets.contains(maxitem)) primesets.add(maxitem);
         }
         return primesets;
     }
@@ -65,28 +76,19 @@ public  class Kodu1a{
         return true;
     }
 
-
-    static int[] rotation(int num) {
-        String numstr = String.valueOf(num);
-        int[] set = new int[numstr.length()];
-
-        for(int i = 0; i<numstr.length(); i++){
-            String rotated = numstr.substring(i, numstr.length()) + numstr.substring(0, i);
-            set[i] = Integer.parseInt(rotated);
+    static int rotate(int num, int numlength){ // length juhuks, kui num lõpeb nulliga
+        int newstart = num % 10;
+        int newend = num / 10;
+        for(int i = 0; i < numlength-1; i++){
+            newstart *= 10;
         }
-        return set;
+        return newstart + newend;
     }
 
-    static boolean get_isprime(int[] set) {
-        for(int i = 0; i<set.length; i++){
-            int num = set[i];
-            // ei kontrolli num==1, num==2, num%2 ja num<=0, sest see on mujal kontrollitud
-            int limit = (int)(Math.sqrt(num));
-            for(int j = 3; j <= limit; j+=2){
-                if(num % j == 0){
-                    return false;
-                }
-            }
+    static boolean isprime(int num){ // input > 9, is an odd number -- ei pruugi olla
+        int limit = (int)(Math.sqrt(num));
+        for(int i=2; i<=limit; i++){
+            if(num % i == 0) return false;
         }
         return true;
     }
