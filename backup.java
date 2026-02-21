@@ -11,7 +11,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Kodu1a {
+public class backup {
     public static void main(String[] args) {
         int input = 106;
 
@@ -39,19 +39,21 @@ public class Kodu1a {
         if(n % 2 == 0) n-=1; // paaris > paaritu
 
         ArrayList<Integer> primesets = new ArrayList<>();
-        // pow10 = numbri pikkus + rotate argument
-        int len = (int)Math.log10(n); // tegelikult len-1, kuid kuna len enam ei kasuta, siis pole tähtis
-        int pow10 = (int)Math.pow(10, len);
+        int numlen = (int)Math.log10(n) + 1;
+        int pow10 = (int)Math.pow(10, numlen - 1); // numbri pikkus + rotate argument
         // iga algarv suuremast väiksemani (paaritu i)
         for(int i = n; i > 9; i-=2){
             if(primes[i]){
-                if(i<pow10) pow10 /= 10;
+                if(i<pow10){
+                numlen -= 1;
+                pow10 = (int)Math.pow(10, numlen-1);
+                }
                 // pöörded
                 int testnr = i;
                 boolean valid = true;
 
                 // Kontrollib, kas pöörded on algarvud ja lisab sobivusel testseti
-                for(int j = 1; j < pow10; j*=10){
+                for(int j = 0; j < numlen-1; j++){
                     testnr = rotate(testnr, pow10);
                     if(testnr <= n && primes[testnr]){ // filtreerib <=n
                         primes[testnr] = false;
