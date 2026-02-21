@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 public class Kodu1a {
     public static void main(String[] args) {
-        int input = 100;
+        int input = 106;
 
         algarvuRingid5Suurimat(input);
         algarvuRingideArv(input);
@@ -39,20 +39,22 @@ public class Kodu1a {
         if(n % 2 == 0) n-=1; // paaris > paaritu
 
         ArrayList<Integer> primesets = new ArrayList<>();
-
+        int numlen = (int)Math.log10(n) + 1;
+        int pow10 = (int)Math.pow(10, numlen - 1); // numbri pikkus + rotate argument
         // iga algarv suuremast väiksemani (paaritu i)
         for(int i = n; i > 9; i-=2){
-
             if(primes[i]){
-                int numlen = (int)Math.log10(i) + 1;
-
+                if(i<pow10){
+                numlen -= 1;
+                pow10 = (int)Math.pow(10, numlen-1);
+                }
                 // pöörded
                 int testnr = i;
                 boolean valid = true;
 
                 // Kontrollib, kas pöörded on algarvud ja lisab sobivusel testseti
                 for(int j = 0; j < numlen-1; j++){
-                    testnr = rotate(testnr, numlen);
+                    testnr = rotate(testnr, pow10);
                     if(testnr <= n && primes[testnr]){ // filtreerib <=n
                         primes[testnr] = false;
                     }
@@ -69,13 +71,8 @@ public class Kodu1a {
         return primesets;
     }
 
-    static int rotate(int num, int numlength){ // length juhuks, kui num lõpeb nulliga
-        int newstart = num % 10;
-        int newend = num / 10;
-        for(int i = 0; i < numlength-1; i++){
-            newstart *= 10;
-        }
-        return newstart + newend;
+    static int rotate(int num, int pow10){ // length juhuks, kui num lõpeb nulliga
+        return (num % 10) * pow10 + (num / 10);
     }
 
     static boolean[] getprimes(int n){
