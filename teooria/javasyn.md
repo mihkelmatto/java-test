@@ -17,26 +17,57 @@
 
 
 # Variables
-Variable - a reusable container for a value
-            a variable behaves as if it was the value it contains
 
-## variable data types
-Primitive - simple value stored directly in memory (stack)
-- int, double, char, boolean
+## primitive data types
+- Primitive - simple value stored directly in memory (stack)
+- doesnt have methods
+- uses less memory
+- cant be null
+
+// integer values
+byte        8-bit         [-128, 127]   // 
+short       16-bit      ~ [-32k, 32k]   // usually typecasted to int with arithmetic ops
+int         32-bit      ~ [-2B, 2B]
+long        64-bit      ~ [-2^63, 2^63] // suffix of L when using as non-variable
+
+// floating point numbers
+- inprecise, can give unexpected results with == operator
+- can have values NaN (not a number), +-Infinity
+float       32-bit      IEEE 754
+double      64-bit      IEEE 754
+
+// other
+char 'x'    16-bit      unicode
+var         will infer a type from its value
+
+<Type>      generic type, used to write a class or method that can have multiple types
+            have to use wrappers with primitive types
+
+## reference data types
 Reference - memory address (stack) that points to the value (heap)
-- string, array, object
+- is an object
+- x=y copies the address
+- can't use == operator
+- uses more memory
+- can have an empty value (null)
 
+String "x"      immutable   // + operator creates a new object, use stringbuilder or stringbuffer
+StringBuilder   mutable, non-synchronized, faster
+StringBuffer    mutable, synchronized, thread-safe
 
-// primitive data types
-int x = 10;     
-double x = 10.0;
-char x = '!'
-boolean x = true
+// list types
+Array           static      indexing O(1)   search O(n)     ordered
+ArrayList       dynamic     indexing O(1)   search O(n)     ordered
+LinkedList      dynamic     indexing O(n)   search O(n)     ordered
 
-// reference data types
-String x = "abcde"
-Array
-Object
+// set types (all dynamic)
+HashSet         add, remove, search: O(1)avg - O(n)         unordered, unique values
+TreeSet         add, remove, search: O(log n)               ordered, sorted
+
+// dict types (all dynamic)
+HashMap         get, put, remove: O(n)avg - O(n)            unordered
+LinkedHashMap   get, put, remove: O(n)avg - O(n)            ordered
+TreeMap         get, put, remove: O(log n)                  ordered, keys sorted
 
 ## steps to creating a variable
 1. declaration
@@ -47,11 +78,27 @@ or
 int x;
 x = 10;
 
-## typecasting
-int x = 0;
-float y = (float)(x);
 
 
+
+
+# typecasting
+
+## implicit (automatic) - typecast when used
+Order of typecasting (size)
+- byte >> short >> int >> long >> float >> double
+- char >> String
+
+## explicit (manual)
+primitive:
+- (type)value
+
+
+reference:
+string > primitive              Type.parsetype(str)
+primitive > string              String.valueOf(primitive) // use this when the value can be null
+primitive wrapper > string      Type.toString(Primitive)
+Object > String                 Obj.toString // needs to have a string representation
 
 
 
@@ -61,8 +108,8 @@ float y = (float)(x);
 When operating on different types, java will typecast everything to highest type.
 order: byte → short → int → long → float → double
 
-operations          + - * / %
-x-equal operations  += -= *= /= %=
+operations          + - * / %           order: PEMDAS, left-to-right 
+x-equal operations  += -= *= /= %=      order: right-to-left
 
 ## logic operators
 
@@ -366,9 +413,13 @@ do{
     ...
 }while(condition);
 
+## infinite loops
+for( ; ; ) {…}
+while (true) {…}
+do {…} while (true);
 
 
-# Ternary if-else
+# Ternary if-else (tingimusavaldis)
 (condition) ? (if-true) : (else);
 !! has to return a value, doesnt work with void !!
 
@@ -388,7 +439,18 @@ try{
     ...
 }
 
-# Enchanced switches
+assert(condition)   // exception kui pole condition
+
+# Switches (lülitidirektiiv)
+// when variable == value1 and no breaks, it will do all 3
+
+switch(variable) {
+    case value1: cmd1; break;
+    case value2: cmd2; break;
+    default: cmd3; // optional
+}
+
+## Enchanced switches
 
 String day = "Saturday";
 boolean weekday;
@@ -419,6 +481,7 @@ else{
 ## overloaded methods
 methods that share the same name, but different parameters
 signature = name + parameters
+- format: methodname(type, type)
 
 ## access modifiers
 
@@ -432,9 +495,9 @@ public          same class and -package, subclass
 ## static/instance
 static                  belongs to the class, shared between all objects
 instance/non-static     belongs to an object, all get their separate values
+                        created when not using the static keyword
 
-## method signature
-format: methodname(type, type)
+
 
 
 

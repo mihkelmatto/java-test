@@ -1,4 +1,5 @@
-public class Main {
+package prog2;
+class prog2p1 {
     public static void main(String[] args) {
         shiftnr(5);
     }

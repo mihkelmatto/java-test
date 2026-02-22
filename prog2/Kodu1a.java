@@ -8,10 +8,11 @@
         primes[algarvud] = false duplikaatide eemaldamiseks
         lisada vastustesse suurim algarv (tsükli i)
  */
+package prog2;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Kodu1a {
+class Kodu1a {
     public static void main(String[] args) {
         int input = 106;
 

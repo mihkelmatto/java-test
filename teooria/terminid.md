@@ -69,10 +69,3 @@ factory             tehase muster
 dependency injection sõltuvuse süstimine
 
 
-
-
-# Object-oriented programming
-Object - an entity that holds data (attributes), perform actions(methods).
-It is a reference data type
-
-
