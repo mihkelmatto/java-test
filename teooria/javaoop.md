@@ -86,4 +86,39 @@ class Test {
 
 
 
-# 
+# Inheritance
+- subclass(child class):    Inherits most functionality of its parent class.
+- superclass(parent class): Source of common functionality among all subclasses.
+- object                    Superclass of all other classes.
+
+
+## extends keyword
+Creates a parent-child relationship between classes.
+
+When a class uses the extends keyword, it will inherit functionality from another class (superclass)
+- Becomes a subclass of the other class
+- inherits all public and protected methods from the superclass
+- can overload the inherited methods
+- doesn't inherit the constructor method (use super() to bypass this)
+- when creating an object, superclass part is initialized first
+
+
+public class Animal {
+    boolean isAlive;
+    Animal(){
+        isAlive = true;
+    }
+    
+    void eat(){
+        System.out.println("The animal is eating");
+    }
+    
+}
+
+// this class will inherit isAlive and eat()
+public class Dog extends Animal{ 
+    int lives = 1;
+    void speak(){
+        System.out.println("Woof");
+    }
+}
