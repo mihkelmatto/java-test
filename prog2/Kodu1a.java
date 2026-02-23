@@ -1,6 +1,7 @@
 //2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97.
 // algarvu kontroll kuni ruutjuur x
 
+
 /*
  1. algarvude leidmine
  2. iga algarvu n -> 9 puhul kontroll, kas pöörded on algarvud
@@ -14,8 +15,7 @@ import java.util.Arrays;
 
 class Kodu1a {
     public static void main(String[] args) {
-        int input = 106;
-
+        int input = 1000;
         algarvuRingid5Suurimat(input);
         algarvuRingideArv(input);
     }
@@ -36,35 +36,36 @@ class Kodu1a {
     }
 
     static ArrayList<Integer> getprimesets(int n){
-        boolean[] primes = getprimes(n);
         if(n % 2 == 0) n-=1; // paaris > paaritu
 
+        boolean[] primes = getprimes(n);
         ArrayList<Integer> primesets = new ArrayList<>();
-        // pow10 = numbri pikkus + rotate argument
-        int len = (int)Math.log10(n); // tegelikult len-1, kuid kuna len enam ei kasuta, siis pole tähtis
-        int pow10 = (int)Math.pow(10, len);
-        // iga algarv suuremast väiksemani (paaritu i)
-        for(int i = n; i > 9; i-=2){
-            if(primes[i]){
-                if(i<pow10) pow10 /= 10;
-                // pöörded
-                int testnr = i;
-                boolean valid = true;
 
-                // Kontrollib, kas pöörded on algarvud ja lisab sobivusel testseti
-                for(int j = 1; j < pow10; j*=10){
-                    testnr = rotate(testnr, pow10);
-                    if(testnr <= n && primes[testnr]){ // filtreerib <=n
-                        primes[testnr] = false;
-                    }
-                    else{
-                        valid = false;
-                        break;
-                    }
+        // pow10 = 10 (len-1) & rotate argument. Kui otse arvutada, siis on vahest aeglasem või läheb katki.
+        int len = (int)Math.log10(n);
+        int pow10 = (int)Math.pow(10, len);
+
+        // i = algarv suuremast väiksemani
+        for(int i = n; i > 9; i-=2){
+            if(i<pow10) pow10 /= 10;
+            if(!primes[i]) continue;
+            
+            // iga kasutatud primes >> false. Kui pööre pole algarv, siis katkestab
+            int testnr = i;
+            boolean valid = true;
+            for(int j = 1; j < pow10; j*=10){
+                testnr = rotate(testnr, pow10);
+
+                if(testnr > n || !primes[testnr]) {
+                    valid = false;
+                    break;
                 }
-                if(valid){
-                    primesets.add(i);
-                }
+                
+                primes[testnr] = false;
+            }
+
+            if(valid){
+                primesets.add(i);
             }
         }
         return primesets;
@@ -74,7 +75,7 @@ class Kodu1a {
         return (num % 10) * pow10 + (num / 10);
     }
 
-    static boolean[] getprimes(int n){
+    static boolean[] getprimes(int n){ // Tagastab listi, mille algarvulised indeksid = true
         boolean[] primes = new boolean[n+1];
         Arrays.fill(primes, true);
         primes[0] = false;
