@@ -1,4 +1,4 @@
-package oop5;
+package OOPkodu2;
 
 public class Lasketiir {
     
