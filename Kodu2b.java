@@ -39,26 +39,50 @@
 // 1 2 2 3 4 5 5
 // 1 2 2 3 4 5 5
 
-
-// iga rea kohta loed kokku arvu esinemise
-// salvestatakse arv:min(value, newvalue)
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Kodu2b {
 
     public static int[] korduvadRidades(int[][] a) {
+        // sort all
         for(int i = 0; i < a.length; i++){
             Arrays.sort(a[i]);
         }
+        // copy first row
+        ArrayList<Integer> ans = new ArrayList<>();
+        for(int item : a[0]) ans.add(item);
 
-        int[] ans = new int[a.length];
-        int ansindex
+        // loop through all subarrays
+        for(int i = 1; i < a.length; i++){
+            int i1 = ans.size()-1;
+            int i2 = a[1].length-1;
 
+            // check pairs per row
+            while(i1 >= 0 && i2 >= 0){
+                if(ans.get(i1) == a[i][i2]){
+                    i1 -= 1;
+                    i2 -= 1;
+                }
+                else if(ans.get(i1) > a[i][i2]){
+                    ans.remove(i1);
+                    i1 -= 1;
+                }
+                else if(ans.get(i1) < a[i][i2]){
+                    // del a[i][i2], kuid pole tegelikult mõtet
+                    i2 -= 1;
+                }
+            }
+            if(i1 >= 0) ans.subList(0, i1+1).clear();
+        }
 
-        System.out.println(ans);
-        return null;
+        // ArrayList >> int[]
+        int[] ansarr = new int[ans.size()];
+        for(int i = 0; i<ans.size(); i++){
+            ansarr[i] = ans.get(i);
+        }
+
+        return ansarr;
     }
 
     public static void main(String[] args) {
@@ -68,8 +92,8 @@ public class Kodu2b {
                 {7, 1, 2, 2},
                 {2, 10, 2, 1}
         };
-
-        korduvadRidades(a);
+        int[] sets = korduvadRidades(a);
+        Helper.print(sets);
     }
 
 }
