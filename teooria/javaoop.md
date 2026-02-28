@@ -372,3 +372,135 @@ public class Car {
 
 
 
+
+
+# Aggregation - "Has-a" relationship between objects
+One object contains another objects as part of its structure, but the contained object can exist independently
+
+
+## example
+// if you delete Library, the books still exist.
+
+class Book{
+    String title;
+    int pages;
+    ...
+}
+class Library{
+    String name;
+    int year;
+    Book[] books;
+    ...
+}
+
+
+
+# Composition - "Part-of" relationship between objects
+Allows complex objects to be constructed of smaller objects
+Larger object controls the smaller's lifecycle. Both depend on each other.
+
+## example
+// When deleting the car, the engine also gets deleted
+
+public class Car{
+    String model;
+    int year;
+    Engine engine;
+    
+    Car(String model, int year, String engineType) {
+        this.model = model;
+        this.year = year;
+        this.engine = new Engine(engineType);
+    }   
+}
+
+public class Engine{
+    String type; 
+    
+    Engine(String type){
+        this.type = type;
+    }
+}
+
+
+
+
+
+# Wrapper classes
+Allows primitive values to be used as objects by wrapping it in a class.
+Allows use of collections framework and static utility methods, ex. Integer.toString() or Character.isLetter()
+
+// this method is depreciated, but is good for illustration.
+Integer a = new Integer(123);
+
+// modern method: autoboxing
+Integer a = 123;
+
+// unboxing
+int x = a;
+
+
+
+
+
+# Anonymous classes - nameless, temporary classes
+- have to extend a class or implement an interface
+- cant have a constructor
+- can define and/or override fields or methods
+- cannot be reused
+- use cases: TimerTask, Runnable, callbacks
+
+##
+public class Main{
+    public static void main(String[] args) {
+        Dog dog1 = new Dog();
+        Dog dog2 = new Dog(){   //
+            @Override
+            void speak(){
+                System.out.println("meow");
+            }
+        };
+
+        dog1.speak(); // prints woof
+        dog2.speak(); // prints meow
+    }   
+}
+
+public class Dog {
+    void speak(){
+        System.out.println("woof");
+    }
+}
+
+
+
+
+
+# Generics - define something that is compatible with different data types
+For classes, interfaces, methods.
+<T> - Type parameter that gets replaced with a real type
+<String> - type argument which replaces <T>
+
+## defining a generic class
+public class Box<t> { // you can also have multiple type args: Box<t, u, v, ...>
+    t item;
+
+    public void setItem(t item){
+        this.item = item;
+    }
+    public t getItem(){
+        return this.item;
+    }
+}
+
+
+public class Main{
+    public static void main(String[] args) {
+        Box<Integer> box = new Box<>();
+        box.setItem(1);
+
+        Box<String> box2 = new Box<>();
+        box2.setItem("banana");
+    }   
+}
+

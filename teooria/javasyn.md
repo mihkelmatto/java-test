@@ -430,16 +430,58 @@ int x = condition ? 1 : 2;
 
 
 
-# try-catch block
+# try-catch block, exceptions
+
+## try-catch
+Analog to Python's try-except
+
 try{
     ...
-} catch (exceptionType - optional) {
+}
+catch (exceptionType e) { // can also be empty name "_"
     ...
-} finally-optional {
+
+}
+catch (Ecxeption e) {  // catches all exceptions
+
+}
+finally-optional {
     ...
 }
 
-assert(condition)   // exception kui pole condition
+assert(condition)   // creates an exception if false
+
+## exceptions
+Throwable                              – Kõik visatavad objektid
+├── Error                               – Tõsised JVM taseme vead
+│   ├── OutOfMemoryError                – Mälu otsas
+│   ├── StackOverflowError              – Liiga sügav rekursioon
+│   ├── VirtualMachineError             – JVM sisemine rike
+│   ├── NoClassDefFoundError            – Klass puudub käitusel
+│   └── AssertionError                  – assert ebaõnnestus
+│
+└── Exception                           – Rakenduse taseme erandid
+    ├── Checked Exceptions              – Peab püüdma või deklareerima
+    │   ├── IOException                 – I/O üldine viga
+    │   │   └── FileNotFoundException   – Faili ei leitud
+    │   ├── SQLException                – Andmebaasi viga
+    │   ├── ClassNotFoundException      – Klassi ei leitud
+    │   ├── ParseException              – Parssimise viga
+    │   └── InterruptedException        – Lõim katkestati
+    │
+    └── RuntimeException (Unchecked)    – Ei pea deklareerima
+        ├── NullPointerException        – Viide on null
+        ├── ArithmeticException         – Aritmeetiline viga
+        ├── ArrayIndexOutOfBoundsException – Massiivi indeks vale
+        ├── IndexOutOfBoundsException   – Indeks väljaspool piire
+        ├── IllegalArgumentException    – Vale argument
+        │   └── NumberFormatException   – Vigane numbri formaat
+        ├── IllegalStateException       – Objekt vales olekus
+        └── ClassCastException          – Vigane tüübi teisendus
+
+
+
+
 
 # Switches (lülitidirektiiv)
 // when variable == value1 and no breaks, it will do all 3
@@ -667,6 +709,8 @@ boolean[2] = new boolean[]{true, false, true};
 
 
 # ArrayLists
+Dynamic size, only holds objects.
+Uses wrapper classes for primitives (autoboxing)
 
 ## creating Arraylists
 import java.util.ArrayList;
@@ -692,6 +736,25 @@ clear()                 remove all elements from a list
 
 
 
+
+# HashMaps
+Key-value pairs. Analog to Python dict
+- Unordered
+- dynamic size
+- Memory efficient
+
+## creating a hashmap
+HashMap<type, type2> map = new HashMap<>();
+
+
+## main methods
+put(), get(), remove()
+containsKey(), containsValue() > boolean
+keySet(), values(), entrySet()
+can be printed directly (has overridden toString)
+
+
+
 # Varargs - allow a method to accept a varying num of arguments
 // java will pack the arguments into an array (ellipsis)
 
@@ -705,3 +768,282 @@ static int add(int... numbers) {
     }
     return sum;
 }
+
+
+
+
+
+# Writing files
+some popular options:
+- FileWriter        good for small-medium text files
+- BufferdWriter     better performance for large amounts of text
+- PrintWriter       best for structured data, like reports or logs
+- FileOutputStream  best for binary files (images, audio, ...)
+
+important exceptions (all need import java.io.exceptionname):
+IOException
+FileNotFoundException
+
+## FileWriter
+import java.io.FileWriter
+
+FileWriter writer = new FileWriter(String path)
+writer.write(String text)
+
+Use multi-line String for longer text """multiline"""
+
+
+
+
+
+# Reading files
+some popular options:
+- BufferedReader + FileReader   Best for reading text files line-by-line
+- FileInputSteap                Best for binary files (images, audio, ...)
+- RandomAccessFile              Best for read/write specific portions of a large file
+
+## BufferedReader + FileReader
+BufferedReader can't read a file by itself. It makes the FileReader more efficient
+
+import java.io.BufferedReader
+import java.io.FileReader
+
+String filepath = "C::\\dir1\\file.txt"
+BufferedReader reader new BufferedReader(new FileReader(filepah));
+
+// reader loop, using readline()
+String line;
+while((line = reader.readline()) != null){ 
+    sout(line)
+}
+
+
+
+
+
+# Date and Time
+Introduction to working with Date & Time, using:
+- LocalDate
+- LocalTime
+- LocalDateTime
+- UTC timestamp
+- DateTimeFormatter
+
+import java.time.format.DateTimeFormatter;
+
+## methods for comparison
+date1.isBefore(date2) > boolean
+date1.isAfter(date2) > boolean
+date1.isEqual(date2) > boolean
+
+
+## LocalDate
+- returns local date using the system clock
+- time format: yyyy-mm-dd
+
+import java.time.LocalDate;
+LocalDate date = LocalDate.now()
+LocalDate custom = LocalDate.of(year, month, day); // arg type: int
+
+## LocalTime
+- returns local time using the system clock
+- time format: hh:mm:ss.ms
+
+import java.time.LocalTime;
+LocalTime time = LocalTime.now();
+LocalTime custom = LocalTime.of(hour, min); // arg type: int
+
+## LocalDateTime
+- returns local datetime using system clock
+- format: yyyy-mm-ddThh:mm:ss.ms
+
+import java.time.LocalDateTime;
+LocalDateTime datetime = LocalDateTime.now();
+LocalDateTime custom = LocalDateTime.of(year, month, day, hour, min); // arg type: int
+
+## UTC timestamp
+- returns current UTC time, using the system clock
+- format: yyyy-mm-ddThh:mm:ss.ms
+
+import java.time.Instant;
+Instant instant = Instant.now();
+
+## DateTimeFormatter
+- format a datetime variable, compatible with all 4 types
+- list of all formats: https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html
+
+
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
+LocalDateTime datetime = LocalDateTime.now();
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy HH:mm:ss");
+String newdatetime = datetime.format(formatter);
+
+System.out.println(newdatetime);
+
+
+
+
+
+# Timers, timertasks
+timer - class that schedules tasks
+timertask - task executed by the timer
+
+You will extend the TimerTask class to define your task
+Create a subclass of TimerTask and @override run()
+
+## example
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+
+Timer timer = new Timer();
+
+TimerTask task = new TimerTask() { // override with an anonymous method
+    int count = 3;
+    
+    @Override
+    public void run(){
+        System.out.println("Task executed");
+        count--;
+        if(count<=0){
+            System.out.println("Task complete");
+            timer.cancel();
+        }
+    }   
+};
+
+timer.schedule(task, 0, 1000);  // args: task, start delay, repetition period.
+                                // time in ms. doesnt pause the program.
+System.out.println("test");
+
+
+
+
+
+# Enums - Classes that define a fixed set of constants
+- Set numeric values to a set of items (ex: days)
+- improve code readability and easy to maintain
+- more efficient with switches when comparing strings
+
+Enum classes:
+- cant extend from a class
+- can implement interfaces
+- is always private or package-private
+- cant create instances with new Classname
+- have built-in methods like:
+    values()                return all enum values
+    valueOf(String name)    finds an enum value
+    ordinal()               finds an index (starts with 0)
+
+## example
+
+
+public enum Day {
+    Monday(1),
+    Tuesday(2),
+    Wednesday(3),
+    Thursday(4),
+    Friday(5),
+    Saturday(6),
+    Sunday(7);
+
+    final int dayNumber;
+
+    Day(int dayNumber) {
+        this.dayNumber = dayNumber;
+    }
+}
+
+public class Main{
+    public static void main(String[] args) {
+        Day day = Day.Monday;
+        System.out.println(day); // "Monday"
+        System.out.println(day.dayNumber); // "1"
+    }   
+}
+
+
+
+
+
+# Threading
+Allows a program to run multiple tasks simultaneously
+Used with: File I/O, network comms, any background tasks
+Can be difficult to use (synchronization)
+
+Option 1: Extend the Thread class (simpler)
+Option 2: Implement the Runnable interface (better)
+Option 3: Lambda-thread (without a separate class)
+
+!! A programm will exit when all threads are finished.
+- threadname.setDaemon(true);     This thread will stop when the others are finished
+- System.exit();                  End all threads and exit the program
+
+
+## Extending the Thread class
+class MyThread extends Thread {
+
+    @Override
+    public void run() {
+        // this works in a separate thread
+    }
+}
+
+-- Using MyThread
+MyThread t = new MyThread();
+t.start();
+
+## Implementing Runnable interface
+// create an object with instructions, then pass it to Thread class
+
+class MyTask implements Runnable {
+
+    @Override
+    public void run() {
+        // this works in a separate thread
+    }
+}
+
+-- using the thread
+Thread t = new Thread(new MyTask());
+t.start();
+
+## lambda-thread
+Thread t = new Thread(() -> {
+    // this works in a separate thread
+    // replaces the need for run() override
+});
+t.start();
+
+
+## Thread class methods
+start()             Start a new thread
+run()               Contains the thread's instructions
+                    is called by start()
+                    won't create a thread by itself
+
+sleep(long ms)      pause the thread for x milliseconds
+join()              wait until another thread finishes
+join(long ms)       will cancel wait at x milliseconds
+
+interrupt()         send an interrupt signal
+setDaemon()         this thread will stop if others are finished
+
+
+// priority
+setPriority(int)    set/get priority for a thread
+yield()             gives CPU time to other threads of same prio
+
+
+// get thread info
+getID()             
+getState()
+getPriority()
+activeCount()
+
+isAlive()           checks if the thread is currently working
+isDaemon()
+isInterrupted()
