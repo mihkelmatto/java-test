@@ -771,8 +771,6 @@ static int add(int... numbers) {
 
 
 
-
-
 # Writing files
 some popular options:
 - FileWriter        good for small-medium text files
@@ -799,7 +797,7 @@ Use multi-line String for longer text """multiline"""
 # Reading files
 some popular options:
 - BufferedReader + FileReader   Best for reading text files line-by-line
-- FileInputSteap                Best for binary files (images, audio, ...)
+- FileInputStream               Best for binary files (images, audio, ...)
 - RandomAccessFile              Best for read/write specific portions of a large file
 
 ## BufferedReader + FileReader
@@ -1047,3 +1045,22 @@ activeCount()
 isAlive()           checks if the thread is currently working
 isDaemon()
 isInterrupted()
+
+# Problems with threads
+race condition
+    when two threads interact with the same variable, it can have unexpected results
+    ex. when two threads try to add +n at the same time, some of the increment could get lost
+    1. t1 and t2 take the old x, both add 1 and return x+1. If both programs started at the same time, one of the increments will get lost.
+
+    solutions:
+        - Synchronize
+        - locks
+        - atomic operations (faster than first two)
+        - immutable objects
+        - use threadsafe data structures
+
+deadlock
+    
+
+
+
