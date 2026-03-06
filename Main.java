@@ -1,31 +1,29 @@
 public class Main {
-    public static int[] getcirc(int[][] matrix, int n) {
+    // n ei tohi olla suurem kui 0.5 "diagonaali"
+    // argument int[] list peab olema ringi pikkuse suhtes piisava suurusega 
+    public static void getcirc(int[][] matrix, int[] list, int n, boolean add) {
         int x1len = matrix.length - 2 * n;
         int x2len = matrix[0].length - 2 * n;
-        if(x1len <=0 | x2len <=0) return new int[0]; // 1x1 maatriks
 
-        int reps = 0;
-        // 1-dimensional
-        if(x1len == 1 | x2len == 1) reps = (int)Math.max(x1len, x2len);
-        // 2-dimensional
-        else reps = 2*(x1len + x2len - 2);
+        // calc loop reps
+        int reps;
+        if(x1len == 1 | x2len == 1) reps = (int)Math.max(x1len, x2len); // 1-dimensional
+        else reps = 2*(x1len + x2len - 2); // 2-dimensional
 
-        int[] circ = new int[reps];
-        int ind = 0;
-
-
-        // bools for directions?
-        // esimene manuaalselt, --x, üles liikumine 1 võrra väiksema limiidiga
-        
-
+        // loop variables
         int x1 = n, x2 = n;
-        System.out.printf("x1len: %s, x2len: %s, x1: %s, x2: %s, reps: %s\n",x1len, x2len, x1, x2, reps);
-
         boolean right, down, left, up;
         right = down = left = up = true;
+        
+        int indC = 0; // circle index
+        int indL = 0; // list index
 
-        circ[ind++] = matrix[x1][x2];
-        for(int i = n; i<reps-1 + n; i++){ //////////
+        // 1st add
+        if(add) matrix[x1][x2] = list[indL++];
+        else list[indC++] = matrix[x1][x2];
+
+        // Index +- 1 > kui suunda pole vahetatud, siis lisab listi
+        for(int i = n; i<reps-1 + n; i++){ // millegipärast reps-1
             
             if(right){
                 if(x2 == matrix[0].length - n - 1){
@@ -35,7 +33,7 @@ public class Main {
                 }
                 x2++;
             } 
-            else if(down){ ////
+            else if(down){
                 if(x1 == matrix.length - n - 1){
                     down = false;
                     i--;
@@ -60,12 +58,11 @@ public class Main {
                 x1--;
             }
 
-            circ[ind++] = matrix[x1][x2];
+            if(add) matrix[x1][x2] = list[indL++];
+            else list[indC++] = matrix[x1][x2];
         }
-
-        return circ;
-        
     }
+    
     public static void main(String[] args) {
         int[][] matrix = {
             {1, 2, 3, 4, 5},
@@ -80,8 +77,13 @@ public class Main {
             {1, 2, 3},
             {1, 2, 3}
         };
+        
         int[][] m3 = new int[5][3];
-        Helper.print(getcirc(m2, 1));
+        int[] list = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+
+        getcirc(m3, list, 0, true);
+        Helper.print(list);
+        Helper.print(m3);
         
     }
 }
