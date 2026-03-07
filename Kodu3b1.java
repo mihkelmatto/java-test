@@ -1,14 +1,8 @@
-public class Main {
+public class Kodu3bL {
     // n ei tohi olla suurem kui 0.5 "diagonaali"
     // argument int[] list peab olema ringi pikkuse suhtes piisava suurusega 
     public static void getcirc(int[][] matrix, int[] list, int n, boolean add) {
-        int x1len = matrix.length - 2 * n;
-        int x2len = matrix[0].length - 2 * n;
-
-        // calc loop reps
-        int reps;
-        if(x1len == 1 | x2len == 1) reps = (int)Math.max(x1len, x2len); // 1-dimensional
-        else reps = 2*(x1len + x2len - 2); // 2-dimensional
+        int reps = roundlen(matrix, n);
 
         // loop variables
         int x1 = n, x2 = n;
@@ -63,6 +57,42 @@ public class Main {
         }
     }
     
+    public static int[] rotate(int[] list, int n){
+        int m = list.length;
+        if(n<0) n = m+n;
+        int[] rotated = new int[m];
+        for(int i = 0; i<m; i++){
+            rotated[(i+n) % m] = list[i];
+        }
+        return rotated;
+    }
+
+    public static int roundlen(int[][] a, int n){
+        int x1len = a.length - 2 * n;
+        int x2len = a[0].length - 2 * n;
+
+        // calc loop reps
+        int lenr;
+        if(x1len == 1 || x2len == 1) lenr = (int)Math.max(x1len, x2len); // 1-dimensional
+        else lenr = 2*(x1len + x2len - 2);
+        return lenr;
+    }
+
+    public static int[][] pööre(int[][] a, int k){
+        int min = (int)Math.min(a.length, a[0].length);
+        int limit = (min % 2 == 0) ? min/2-1 : min/2;
+
+        for(int i = 0; i<limit; i++){
+            int rlen = roundlen(a, i);
+            int[] list = new int[rlen];
+            getcirc(a, list, i, false);
+            list = rotate(list, k);
+            getcirc(a, list, i, true);
+        }
+        return a;
+    }
+
+
     public static void main(String[] args) {
         int[][] matrix = {
             {1, 2, 3, 4, 5},
@@ -76,14 +106,6 @@ public class Main {
             {1, 2, 3},
             {1, 2, 3},
             {1, 2, 3}
-        };
-        
-        int[][] m3 = new int[5][3];
-        int[] list = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-
-        getcirc(m3, list, 0, true);
-        Helper.print(list);
-        Helper.print(m3);
-        
+        };        
     }
 }

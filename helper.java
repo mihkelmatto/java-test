@@ -68,7 +68,7 @@ import java.util.ArrayList;
             }
             System.out.print("]");
             if (i < arr.length - 1) {
-                System.out.print(", ");
+                System.out.print(", \n");
             }
         }
         System.out.println("]");
