@@ -38,3 +38,20 @@ Closeable
 
 
 // 
+
+
+
+# Problems with threads
+race condition
+    when two threads interact with the same variable, it can have unexpected results
+    ex. when two threads try to add +n at the same time, some of the increment could get lost
+    1. t1 and t2 take the old x, both add 1 and return x+1. If both programs started at the same time, one of the increments will get lost.
+
+    solutions:
+        - Synchronize
+        - locks
+        - atomic operations (faster than first two)
+        - immutable objects
+        - use threadsafe data structures
+
+deadlock

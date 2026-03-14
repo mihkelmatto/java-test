@@ -222,22 +222,22 @@ Type.ParseType()                use any type here to cast Type x > String
 
 
 ## substrings and replacements
-substring(x, y) > string        returns the substring from indeces [x, y)
-replace(old, new)               replace all instances of a character or a substring
-replaceAll(r1, r2) > string     regex based replace
-replaceFirst(r1, r2) > string   regex based replacefirst
+substring(x, y) > string                    returns the substring from indeces [x, y)
+replace(old, new)                           replace all instances of a character or a substring
+replaceAll(r1, r2) > string                 regex based replace
+replaceFirst(r1, r2) > string               regex based replacefirst
 
 ## trim, spaces
-trim() > String                 removes spaces from prefix-suffix
-strip() > String                removes unicode-spaces (more accurate than trim)
-stripLeading() > String         strip prefix-only
-stripTrailing() > String        strip suffix-only
+trim() > String                             removes spaces from prefix-suffix
+strip() > String                            removes unicode-spaces (more accurate than trim)
+stripLeading() > String                     strip prefix-only
+stripTrailing() > String                    strip suffix-only
 
 ## upper-lowercase
 both support Locale as args
 
-toUpperCase() > String          change all chars to uppercase
-toLowerCase() > String          change all chars to lowercase
+toUpperCase() > String                      change all chars to uppercase
+toLowerCase() > String                      change all chars to lowercase
 
 # split-concat
 split(str regex, int limit) > String[]      split. Limit (list length) is optional
@@ -245,11 +245,73 @@ concat(str) > str                           concatenate, adding arg to end
 String.join("spr", x1, x2) > String         join multiple strings, using the provided separator
 
 # other
-repeat(int count) > string      repeat the string x times
+repeat(int count) > string                  repeat the string x times
 
-codePointAt(int index) > int            returns unicode dec at index
-codePointBefore(int index) > int        returns unicode before index
-codePoints() > IntStream                returns a stream of unicode
+codePointAt(int index) > int                returns unicode dec at index
+codePointBefore(int index) > int            returns unicode before index
+codePoints() > IntStream                    returns a stream of unicode
+
+
+
+
+
+# Mutable strings (ex. StringBuilder)
+
+## String.format()
+Creates a new string in the required format.
+- Useful when the string can be created in one step.
+- Works the same as printf (in another chapter)
+
+string str = String.format("String-with-format-specifiers", arg1, arg2, ...)
+
+
+## StringBuilder class
+Class for a mutable string
+- Useful when building a string in multiple steps, (ex. with loops)
+- fast
+- isn't thread-safe
+- dynamic length. Default start: 16.
+
+StringBuilder sb = new StringBuilder(); // can give int:len as argument. Default: 16
+...
+String s = sb.toString();
+
+
+## StringBuffer class
+StringBuilder, but slower and thread-safe
+- Shares all? methods with StringBuilder
+
+StringBuffer sb = new StringBuffer();
+...
+String s = sb.toString();
+
+
+## Stringbuilder, stringbuffer methods
+// adding
+append(<type> value)                        adds a value to the end. Can be any type?
+insert(int offset, <type> value)            add to a specific location. can be any type?
+
+// editing
+setCharAt(int index, char ch)               replace a char on given index
+replace(int start, int end, String str)     replace within a range of indeces
+reverse()                                   reverse the string
+delete(int start, int end)                  delete within a range
+
+// indexing
+charAt(int index)                           return a char at an index
+indexOf(String str, int fromindex)          return the index of first occurrence, or -1 if not found
+                                            fromidex is optional
+
+// properties
+length()                                    return the amount of chars in the current string
+setLength(int newlen)                       set the length of a builder/buffer. cut the end chars if necessary
+capacity()                                  return the buffer length
+
+toString()                                  returns the string equivalent of the builder/buffer
+
+
+
+
 
 
 
@@ -591,6 +653,24 @@ x = 11 // error, because x doesnt exist
 
 
 
+# Varargs - allow a method to accept a varying num of arguments
+// java will pack the arguments into an array (ellipsis)
+
+// only 1 vararg per method, it has to be the last argument'
+// for multiple varargs, use arrays as args instead
+
+static int add(int... numbers) {
+    int sum = 0;
+    for (int i = 0; i < numbers.length; i++) {
+        sum += numbers[i];
+    }
+    return sum;
+}
+
+
+
+
+
 # collections (list, array, set, ...)
 
 ## list - ordered, non-unique
@@ -755,65 +835,59 @@ can be printed directly (has overridden toString)
 
 
 
-# Varargs - allow a method to accept a varying num of arguments
-// java will pack the arguments into an array (ellipsis)
-
-// only 1 vararg per method, it has to be the last argument'
-// for multiple varargs, use arrays as args instead
-
-static int add(int... numbers) {
-    int sum = 0;
-    for (int i = 0; i < numbers.length; i++) {
-        sum += numbers[i];
-    }
-    return sum;
-}
 
 
+# BlockingQueue
+Thread-safe implementations for various collections.
+Most likely FIFO-ordered.
 
-# Writing files
-some popular options:
-- FileWriter        good for small-medium text files
-- BufferdWriter     better performance for large amounts of text
-- PrintWriter       best for structured data, like reports or logs
-- FileOutputStream  best for binary files (images, audio, ...)
+most common implementations:
+- ArrayBlockingQueue    FIFO, fixed length, array-based
+- LinkedBlockingQueue   FIFO, dynamic length (can be limited), linked-list-based
+- PriorityBlockingQueue FIFO + priority, dynamic length
+- DelayQueue            delay-based order, dynamic length
+- SynchronousQueue      0-capacity, unordered, 1:1 put()-take(), directly between producer and consumer
 
-important exceptions (all need import java.io.exceptionname):
-IOException
-FileNotFoundException
+## ArrayBlockingQueue methods
 
-## FileWriter
-import java.io.FileWriter
+// Insertion
+add(<type> el) > boolean        IllegalStateException if full
+offer(<type> el) > boolean      return false if full. optional time.
+                                optional args: (long timeout, TimeUnit unit)
+                                - possible InterruptedException
 
-FileWriter writer = new FileWriter(String path)
-writer.write(String text)
-
-Use multi-line String for longer text """multiline"""
-
-
+put(<type> el) > boolean        if the queue is full, block the thread
+                                *indefinitely or when a spot opens
+                                possible InterruptedException
 
 
+// removal (remove and return the first element)
+remove() > <type> el            throw NoSuchElementException if empty
+ 
+poll() > <type> el              return null if empty
+                                optional args: (long timeout, TimeUnit unit)
+                                - possible InterruptedException
+ 
+take() > <type> el              if the queue is empty, block the thread
+                                *indefinitely or when a spot fills
+                                - possible InterruptedException
 
-# Reading files
-some popular options:
-- BufferedReader + FileReader   Best for reading text files line-by-line
-- FileInputStream               Best for binary files (images, audio, ...)
-- RandomAccessFile              Best for read/write specific portions of a large file
 
-## BufferedReader + FileReader
-BufferedReader can't read a file by itself. It makes the FileReader more efficient
+// examination (return without removal)
+element() > <type> el           throw NoSuchElementException if empty
+peek > <type> el                return null if empty
 
-import java.io.BufferedReader
-import java.io.FileReader
 
-String filepath = "C::\\dir1\\file.txt"
-BufferedReader reader new BufferedReader(new FileReader(filepah));
+// Other
+remainingCapacity() > int       return the amount of empty spots
+size() > int                    return the amount of filled spots
+contains(Object o) > boolean    check if the queue contains o
 
-// reader loop, using readline()
-String line;
-while((line = reader.readline()) != null){ 
-    sout(line)
-}
+toArray() > Object[]            return the array equivalent of current queue
+                                optional arg: <Type>[] a
+
+clear() > void                  remove all queue contents
+drainTo(Collection c) > int     move (and remove) all elements to a collection. Return the amount of moved el.
 
 
 
@@ -1045,22 +1119,3 @@ activeCount()
 isAlive()           checks if the thread is currently working
 isDaemon()
 isInterrupted()
-
-# Problems with threads
-race condition
-    when two threads interact with the same variable, it can have unexpected results
-    ex. when two threads try to add +n at the same time, some of the increment could get lost
-    1. t1 and t2 take the old x, both add 1 and return x+1. If both programs started at the same time, one of the increments will get lost.
-
-    solutions:
-        - Synchronize
-        - locks
-        - atomic operations (faster than first two)
-        - immutable objects
-        - use threadsafe data structures
-
-deadlock
-    
-
-
-

@@ -34,128 +34,133 @@
 					"label": ""
 				},
 				{
-					"line": 256,
-					"column": 0,
-					"label": ""
-				},
-				{
 					"line": 257,
-					"column": 2,
-					"label": ""
-				},
-				{
-					"line": 274,
-					"column": 2,
-					"label": ""
-				},
-				{
-					"line": 315,
-					"column": 2,
-					"label": ""
-				},
-				{
-					"line": 352,
-					"column": 2,
-					"label": ""
-				},
-				{
-					"line": 369,
-					"column": 2,
-					"label": ""
-				},
-				{
-					"line": 421,
-					"column": 4,
-					"label": ""
-				},
-				{
-					"line": 432,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 485,
-					"column": 6,
-					"label": ""
-				},
-				{
-					"line": 515,
-					"column": 3,
-					"label": ""
-				},
-				{
-					"line": 547,
-					"column": 9,
-					"label": ""
-				},
-				{
-					"line": 592,
-					"column": 0,
-					"label": ""
-				},
-				{
-					"line": 593,
-					"column": 16,
-					"label": ""
-				},
-				{
-					"line": 648,
-					"column": 16,
-					"label": ""
-				},
-				{
-					"line": 710,
 					"column": 12,
 					"label": ""
 				},
 				{
-					"line": 739,
-					"column": 10,
-					"label": ""
-				},
-				{
-					"line": 756,
+					"line": 318,
 					"column": 0,
 					"label": ""
 				},
 				{
-					"line": 757,
+					"line": 319,
+					"column": 2,
+					"label": ""
+				},
+				{
+					"line": 336,
+					"column": 2,
+					"label": ""
+				},
+				{
+					"line": 377,
+					"column": 2,
+					"label": ""
+				},
+				{
+					"line": 413,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 414,
+					"column": 2,
+					"label": ""
+				},
+				{
+					"line": 431,
+					"column": 2,
+					"label": ""
+				},
+				{
+					"line": 483,
+					"column": 4,
+					"label": ""
+				},
+				{
+					"line": 494,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 547,
+					"column": 6,
+					"label": ""
+				},
+				{
+					"line": 576,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 577,
+					"column": 3,
+					"label": ""
+				},
+				{
+					"line": 609,
+					"column": 9,
+					"label": ""
+				},
+				{
+					"line": 655,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 672,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 673,
 					"column": 16,
 					"label": ""
 				},
 				{
-					"line": 773,
+					"line": 728,
+					"column": 16,
+					"label": ""
+				},
+				{
+					"line": 790,
+					"column": 12,
+					"label": ""
+				},
+				{
+					"line": 819,
+					"column": 10,
+					"label": ""
+				},
+				{
+					"line": 839,
 					"column": 15,
 					"label": ""
 				},
 				{
-					"line": 796,
+					"line": 894,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 895,
 					"column": 15,
 					"label": ""
 				},
 				{
-					"line": 821,
-					"column": 15,
-					"label": ""
-				},
-				{
-					"line": 886,
+					"line": 960,
 					"column": 20,
 					"label": ""
 				},
 				{
-					"line": 923,
+					"line": 997,
 					"column": 7,
 					"label": ""
 				},
 				{
-					"line": 969,
+					"line": 1043,
 					"column": 11,
-					"label": ""
-				},
-				{
-					"line": 1048,
-					"column": 1,
 					"label": ""
 				}
 			]
@@ -261,6 +266,56 @@
 				{
 					"line": 478,
 					"column": 10,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "teooria/IO.md",
+			"bookmarks": [
+				{
+					"line": 0,
+					"column": 7,
+					"label": ""
+				},
+				{
+					"line": 18,
+					"column": 7,
+					"label": ""
+				},
+				{
+					"line": 108,
+					"column": 12,
+					"label": ""
+				},
+				{
+					"line": 161,
+					"column": 13,
+					"label": ""
+				},
+				{
+					"line": 218,
+					"column": 7,
+					"label": ""
+				},
+				{
+					"line": 264,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 284,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 307,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 352,
+					"column": 15,
 					"label": ""
 				}
 			]
