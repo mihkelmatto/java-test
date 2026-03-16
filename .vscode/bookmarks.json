@@ -319,6 +319,36 @@
 					"label": ""
 				}
 			]
+		},
+		{
+			"path": "teooria/Maven.md",
+			"bookmarks": [
+				{
+					"line": 0,
+					"column": 5,
+					"label": ""
+				},
+				{
+					"line": 24,
+					"column": 10,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "teooria/JavaFX.md",
+			"bookmarks": [
+				{
+					"line": 0,
+					"column": 13,
+					"label": ""
+				},
+				{
+					"line": 76,
+					"column": 15,
+					"label": ""
+				}
+			]
 		}
 	]
 }
