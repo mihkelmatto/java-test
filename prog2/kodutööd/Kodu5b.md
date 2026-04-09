@@ -9,8 +9,10 @@
  * 
  **********************************/
 
+package kodutööd;
 import java.util.ArrayList;
 import java.util.Arrays;
+
 
 public class Kodu5b {
     public static void main(String[] args) {
