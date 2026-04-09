@@ -1,14 +1,11 @@
 import java.util.ArrayList;
-import ee.ut.dendroloj.Dendrologist;
-import ee.ut.dendroloj.Grow;
+import java.util.Comparator;
 
 public class Kodu6a {
     public static void main(String[] args) {
-        int[] a = {1, 2, 3};
+        int[] a = {1, 1, 1, 1, 1};
 
-        // Dendrologist.wakeUp();
-        String[] avaldised = avaldisedLõigus(a, 0, 100);
-
+        String[] avaldised = avaldisedLõigus(a, 1, 1);
         for(String avaldis : avaldised) System.out.println(avaldis);
     }
 
@@ -20,66 +17,41 @@ public class Kodu6a {
     
     */
     public static String[] avaldisedLõigus(int[] a, int x, int y){
-        ArrayList<String> avaldised = avaldisedLõigus(a, x, y, Integer.toString(a[0]), a[0], a[0], 1);
+        if(a.length == 0) return new String[0];
+        ArrayList<String> avaldised = avaldisedLõigus(a, x, y, Integer.toString(a[0]), a[0], 1);
         return avaldised.toArray(new String[avaldised.size()]);
     }
 
-    // @Grow
-    public static ArrayList<String> avaldisedLõigus(int[] a, int x, int y, String avaldis, int tulemus, int eelmineliidetav, int i){
+    public static ArrayList<String> avaldisedLõigus(int[] a, int x, int y, String avaldis, int tulemus, int i){
         ArrayList<String> avaldised = new ArrayList<>();
 
         if(i == a.length){
             if(tulemus >= x && tulemus <= y){
-                avaldised.add(avaldis + " = " + tulemus);
+                avaldised.add(avaldis + "=" + tulemus);
             }
             return avaldised;
         }
 
         avaldised.addAll(avaldisedLõigus(a, x, y, 
-                                        avaldis + " + " + a[i], // avaldis
+                                        avaldis + "+" + a[i], // avaldis
                                         tulemus + a[i],         // tulemus
-                                        a[i],
                                         i+1));
 
         avaldised.addAll(avaldisedLõigus(a, x, y,
-                                        avaldis + " - " + a[i], // avaldis
+                                        avaldis + "-" + a[i], // avaldis
                                         tulemus - a[i],         // tulemus
-                                        -a[i],
                                         i+1));
 
-        avaldised.addAll(avaldisedLõigus(a, x, y,
-                                        avaldis + " * " + a[i], // avaldis
-                                        (tulemus - eelmineliidetav) + eelmineliidetav * a[i],   // tulemus
-                                        eelmineliidetav * a[i],
-                                        i+1));
+        Comparator<String> cmp = new Comparator<String>() {
+            @Override
+            public int compare(String s1, String s2) {
+                int i1 = Integer.valueOf(s1.split("=")[1]);
+                int i2 = Integer.valueOf(s2.split("=")[1]);
+                return Integer.compare(i1, i2);
+            }
+        };
 
-        return avaldised;
-    }
-
-    static ArrayList<String> lisa(ArrayList<String> list, String avaldis){
-        return lisa(list, avaldis, 0);
-    }
-
-    static ArrayList<String> lisa(ArrayList<String> list, String avaldis, int i){
-        ArrayList<String> avaldised = new ArrayList<>();
-
-        if(i == list.size()){
-            avaldised.add(avaldis);
-            return avaldised;
-        }
-
-        int tulemus = Integer.valueOf(avaldis.split(" = ")[1]);
-        int temp = Integer.valueOf(list.get(i).split(" = ")[1]);
-        
-        if(tulemus < temp){
-            avaldised.add(avaldis);
-            avaldised.addAll(list.subList(i, list.size()));
-            return avaldised;
-        }
-        else{
-            avaldised.add(list.get(i));
-            avaldised.addAll(lisa(list, avaldis, i+1));
-        }
+        avaldised.sort(cmp);
         return avaldised;
     }
 
