@@ -1119,3 +1119,20 @@ activeCount()
 isAlive()           checks if the thread is currently working
 isDaemon()
 isInterrupted()
+
+
+
+# Lambdas
+
+## functional interfaces
+Functional interface is an interface with a single abstract method (function)
+- The interface can also have any number of default or static methods
+- When using @FunctionalInterface, the compiler will check the num of abstract methods
+
+
+@FunctionalInterface
+interface MyFunction {
+    int apply(int a, int b); // Single abstract method
+}
+
+## lambdas
