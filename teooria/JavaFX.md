@@ -7,7 +7,7 @@ Root node       The root of the scene graph.
 ## Structure example
 Stage
  └── Scene
-      └── VBox (root node)
+      └── VBox (root node) ## Group or layout
            ├── Button
            ├── Label
            └── HBox
@@ -205,4 +205,61 @@ setOnKeyPressed     (EventHandler<? super KeyEvent> value)
 setOnKeyReleased    (EventHandler<? super KeyEvent> value) 
 
 setOnMouseClicked   (EventHandler<? super MouseEvent> value)
-setOnMouseMoved     (EventHandler<? super MouseEvent> value) 
+setOnMouseMoved     (EventHandler<? super MouseEvent> value)
+
+
+
+# Layouts
+
+// positioning
+VBox                Items are stacked vertically (on top of each other)
+HBox                Items are stacked horizontally (next to each other)
+
+BorderPane          Screen has 5 zones: center and one for each side (top, bottom, left, right)
+GridPane            coordinate-based layout
+
+// utility
+StackPane           items are stacked over each other (overlay)
+AnchorPane
+FlowPane            items use css-like flow
+TilePane            like flowpane, but every component is the same size
+
+
+Pane                Simple layout container
+Group               Isn't a layout, only works
+
+## general methods
+All have a prefix of node.method() (node = layout or group)
+
+// add, remove items
+getChildren().remove()       removes an element from layout
+getChildren().addAll()       adds multiple elements to layout
+getChildren().clear()        removes all items from layout
+
+
+// adjust size (also works with width, height separately)
+setPrefSize(width, height)  
+setMinSize(width, height)
+setMaxSize(width, height)
+
+// spacing
+setSpacing()                space from outside the element
+setPadding()                space from inside
+setHgap()                   
+setVgap()
+setAlignment(alignment)
+
+// other
+setHgrow(node, priority)    set grow properties from window size
+setStyle("css-properties")  set inline style     
+
+## BorderPane
+BorderPane should usually have other layouts inside it
+
+setTop()        // set an element to borderpane position
+setBottom()
+setLeft()
+setRight()
+setCenter()
+
+setMargin()     // margins between borderpane elements
