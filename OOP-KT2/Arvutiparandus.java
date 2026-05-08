@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Arvutiparandus {
     public static void main(String[] args) {
         String file = "andmed.txt"; // TODO: loe failinimi args[]-st
-        ArrayList<Arvuti> parandada = loeFail(file);
+        Sessioon sessioon = new Sessioon(loeFail(file));
 
         try(Scanner scanner = new Scanner(System.in)){
             String in;
@@ -23,7 +23,7 @@ public class Arvutiparandus {
 
                 }
                 else if(in.equals("R")){
-
+                    registreeri(scanner, sessioon);
                 }
                 else if(in.equals("L")){
 
@@ -37,6 +37,23 @@ public class Arvutiparandus {
             System.out.println(e);
         }
 
+    }
+    private static void registreeri(Scanner scanner, Sessioon sessioon){
+        while(true){
+            try{
+                System.out.println("Sisesta töö kirjeldus: ");
+                sessioon.lisaArvuti(loeArvuti(scanner.nextLine()));
+                System.out.println("Töö registreeritud");
+                return;
+            }
+            catch(FormaadiErind f){
+                System.out.printf("Vigane sisestus! %s\n", f.getMessage());
+            }
+            catch(Exception e){
+                System.out.println(e);
+                return;
+            }
+        }
     }
 
     private static double leiaBaashind(String parandaja, int aegmin){
@@ -81,7 +98,7 @@ public class Arvutiparandus {
         return arvutid;
     }
 
-    private static Arvuti loeArvuti(String kirjeldus){
+    private static Arvuti loeArvuti(String kirjeldus) throws FormaadiErind{
         String[] temp = kirjeldus.strip().split("@");
 
         // kui kirjelduses pole aega, siis temp.length == 1
@@ -93,17 +110,19 @@ public class Arvutiparandus {
 
         temp = temp[0].split(";");
 
-        try{
-            if(temp.length < 2 || temp.length > 3) throw new FormaadiErind("Loearvuti: Vale andmete kogus (2-3)");
-            if(!(temp[1].equals("tavatöö") || temp[1].equals("kiirtöö"))) throw new FormaadiErind("Loearvuti: pole tavatöö ega kiirtöö");
-            if(temp.length == 3 && !temp[2].equals("monitoriga")) throw new FormaadiErind("valed andmed kolmandas väljas (peab olema 'monitoriga'");
-        }
-        catch(Exception e){
-            System.out.println(e); // TODO: mida selle veaga peale hakata?
-        }
+        if(temp.length < 2 || temp.length > 3) throw new FormaadiErind("Loearvuti: Vale andmete kogus (2-3)");
+        if(!(temp[1].equals("tavatöö") || temp[1].equals("kiirtöö"))) throw new FormaadiErind("Loearvuti: pole tavatöö ega kiirtöö");
+        if(temp.length == 3 && !temp[2].equals("monitoriga")) throw new FormaadiErind("valed andmed kolmandas väljas (peab olema 'monitoriga'");
 
         boolean onkiirtoo = (temp[1].equals("kiirtöö")) ? true : false;
         if(temp.length == 3) return new VäliseMonitorigaArvuti(temp[0], onkiirtoo, regaeg);
         else return new Arvuti(temp[0], onkiirtoo, regaeg);
     }
+
+    private static void kirjutaOotel(Sessioon sessioon){
+
+    }
+
+
 }
+
